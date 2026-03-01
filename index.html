@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Screen Time Ramadhan</title>
+  <style>
+    body {
+      font-family: Arial;
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+    }
+    button {
+      padding: 10px;
+      width: 100%;
+      background: green;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Input Screen Time</h2>
+
+<input type="number" id="medsos" placeholder="Medsos (menit)">
+<input type="number" id="game" placeholder="Game (menit)">
+<input type="number" id="belajar" placeholder="Belajar (menit)">
+
+<button onclick="kirimData()">Kirim Data</button>
+
+<p id="status"></p>
+
+<script>
+function kirimData() {
+  fetch("https://script.google.com/macros/s/AKfycbzMkvIqKBlHTVhLlHP25thMdxXFXMunUlRjjUhdO3jL7Mp1c7qj_Gf8fbrE7b5LNcJDsA/exec", {
+    method: "POST",
+    body: JSON.stringify({
+      medsos: document.getElementById("medsos").value,
+      game: document.getElementById("game").value,
+      belajar: document.getElementById("belajar").value
+    })
+  })
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("status").innerText = "Data terkirim!";
+  });
+}
+</script>
+
+</body>
+</html>
